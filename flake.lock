@@ -1,0 +1,295 @@
+{
+  "nodes": {
+    "cavekit-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1776687932,
+        "narHash": "sha256-GOyHS+iYfOo79gm7rpFgL0mTf07+FjUa8T93MsRBMCk=",
+        "owner": "JuliusBrussee",
+        "repo": "cavekit",
+        "rev": "028643f913996cfe1c59f261627d167d4ab5477f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "JuliusBrussee",
+        "repo": "cavekit",
+        "type": "github"
+      }
+    },
+    "nix-dev-shell-agentic-stub": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1777625276,
+        "narHash": "sha256-J/aoCai96LmWy6iCO+6MoRj+bjaQbyy6nO2Ji/BKKwc=",
+        "owner": "pr0d1r2",
+        "repo": "nix-dev-shell-agentic",
+        "rev": "88162818f02debe57356e0d9b6d96bcc88630758",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pr0d1r2",
+        "repo": "nix-dev-shell-agentic",
+        "type": "github"
+      }
+    },
+    "nix-lefthook-git-conflict-markers": {
+      "inputs": {
+        "nix-dev-shell-agentic": [
+          "nix-dev-shell-agentic-stub"
+        ],
+        "nix-lefthook-git-no-local-paths": [
+          "nix-lefthook-git-no-local-paths"
+        ],
+        "nix-lefthook-missing-final-newline": [
+          "nix-lefthook-missing-final-newline"
+        ],
+        "nix-lefthook-nix-no-embedded-shell": [
+          "nix-lefthook-nix-no-embedded-shell"
+        ],
+        "nix-lefthook-statix": [
+          "nix-lefthook-statix"
+        ],
+        "nix-lefthook-trailing-whitespace": [
+          "nix-lefthook-trailing-whitespace"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1777629182,
+        "narHash": "sha256-7ljdAhUz/RDCg1VGVa3DMQhXtbg9ePgEvqgOrRsD0Qg=",
+        "owner": "pr0d1r2",
+        "repo": "nix-lefthook-git-conflict-markers",
+        "rev": "d0577040f8b7516659e7f6dcdabae55fa9a94630",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pr0d1r2",
+        "repo": "nix-lefthook-git-conflict-markers",
+        "type": "github"
+      }
+    },
+    "nix-lefthook-git-no-local-paths": {
+      "inputs": {
+        "nix-dev-shell-agentic": [
+          "nix-dev-shell-agentic-stub"
+        ],
+        "nix-lefthook-git-conflict-markers": [
+          "nix-lefthook-git-conflict-markers"
+        ],
+        "nix-lefthook-missing-final-newline": [
+          "nix-lefthook-missing-final-newline"
+        ],
+        "nix-lefthook-nix-no-embedded-shell": [
+          "nix-lefthook-nix-no-embedded-shell"
+        ],
+        "nix-lefthook-statix": [
+          "nix-lefthook-statix"
+        ],
+        "nix-lefthook-trailing-whitespace": [
+          "nix-lefthook-trailing-whitespace"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1777629136,
+        "narHash": "sha256-3b/5Kan4cSk4cMfVhbRyrYVnJXzfx89ArtruU/ur13Q=",
+        "owner": "pr0d1r2",
+        "repo": "nix-lefthook-git-no-local-paths",
+        "rev": "cb01ea260b6040bce672d410d06ba81025d50d84",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pr0d1r2",
+        "repo": "nix-lefthook-git-no-local-paths",
+        "type": "github"
+      }
+    },
+    "nix-lefthook-missing-final-newline": {
+      "inputs": {
+        "nix-dev-shell-agentic": [
+          "nix-dev-shell-agentic-stub"
+        ],
+        "nix-lefthook-git-conflict-markers": [
+          "nix-lefthook-git-conflict-markers"
+        ],
+        "nix-lefthook-git-no-local-paths": [
+          "nix-lefthook-git-no-local-paths"
+        ],
+        "nix-lefthook-nix-no-embedded-shell": [
+          "nix-lefthook-nix-no-embedded-shell"
+        ],
+        "nix-lefthook-statix": [
+          "nix-lefthook-statix"
+        ],
+        "nix-lefthook-trailing-whitespace": [
+          "nix-lefthook-trailing-whitespace"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1777629082,
+        "narHash": "sha256-kujrCg8oIJxyjF7zSzWrKd1XHnM5U/OLFUlWbJi8MV4=",
+        "owner": "pr0d1r2",
+        "repo": "nix-lefthook-missing-final-newline",
+        "rev": "68ab47464e28876ad5fca8e1bf82867aac55b359",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pr0d1r2",
+        "repo": "nix-lefthook-missing-final-newline",
+        "type": "github"
+      }
+    },
+    "nix-lefthook-nix-no-embedded-shell": {
+      "inputs": {
+        "nix-dev-shell-agentic": [
+          "nix-dev-shell-agentic-stub"
+        ],
+        "nix-lefthook-git-conflict-markers": [
+          "nix-lefthook-git-conflict-markers"
+        ],
+        "nix-lefthook-git-no-local-paths": [
+          "nix-lefthook-git-no-local-paths"
+        ],
+        "nix-lefthook-missing-final-newline": [
+          "nix-lefthook-missing-final-newline"
+        ],
+        "nix-lefthook-statix": [
+          "nix-lefthook-statix"
+        ],
+        "nix-lefthook-trailing-whitespace": [
+          "nix-lefthook-trailing-whitespace"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1777629010,
+        "narHash": "sha256-5yTdlz+QJZCFsNep8zXKQ/iI6ZKwPrej8OAfH76ehIQ=",
+        "owner": "pr0d1r2",
+        "repo": "nix-lefthook-nix-no-embedded-shell",
+        "rev": "7c0998b141868fd6e3ad6b6f690507cef6da4a61",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pr0d1r2",
+        "repo": "nix-lefthook-nix-no-embedded-shell",
+        "type": "github"
+      }
+    },
+    "nix-lefthook-statix": {
+      "inputs": {
+        "nix-dev-shell-agentic": [
+          "nix-dev-shell-agentic-stub"
+        ],
+        "nix-lefthook-git-conflict-markers": [
+          "nix-lefthook-git-conflict-markers"
+        ],
+        "nix-lefthook-git-no-local-paths": [
+          "nix-lefthook-git-no-local-paths"
+        ],
+        "nix-lefthook-missing-final-newline": [
+          "nix-lefthook-missing-final-newline"
+        ],
+        "nix-lefthook-nix-no-embedded-shell": [
+          "nix-lefthook-nix-no-embedded-shell"
+        ],
+        "nix-lefthook-trailing-whitespace": [
+          "nix-lefthook-trailing-whitespace"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1777629213,
+        "narHash": "sha256-NsAOFMZLWE+6N1J087B+/tJAdn2Vc4nfHlWfrHIPmWg=",
+        "owner": "pr0d1r2",
+        "repo": "nix-lefthook-statix",
+        "rev": "891cb76ce49ab8805f705bac6683df7ef5bca118",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pr0d1r2",
+        "repo": "nix-lefthook-statix",
+        "type": "github"
+      }
+    },
+    "nix-lefthook-trailing-whitespace": {
+      "inputs": {
+        "nix-dev-shell-agentic": [
+          "nix-dev-shell-agentic-stub"
+        ],
+        "nix-lefthook-git-conflict-markers": [
+          "nix-lefthook-git-conflict-markers"
+        ],
+        "nix-lefthook-git-no-local-paths": [
+          "nix-lefthook-git-no-local-paths"
+        ],
+        "nix-lefthook-missing-final-newline": [
+          "nix-lefthook-missing-final-newline"
+        ],
+        "nix-lefthook-nix-no-embedded-shell": [
+          "nix-lefthook-nix-no-embedded-shell"
+        ],
+        "nix-lefthook-statix": [
+          "nix-lefthook-statix"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1777629057,
+        "narHash": "sha256-eAjxFlyWslU9G3NLHz8ckWS5Ln/tfSJPVbBYL4i5+LQ=",
+        "owner": "pr0d1r2",
+        "repo": "nix-lefthook-trailing-whitespace",
+        "rev": "c3bf1d1e09f70308bc193fe554b1db676d2fa425",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pr0d1r2",
+        "repo": "nix-lefthook-trailing-whitespace",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1777428379,
+        "narHash": "sha256-ypxFOeDz+CqADEQNL72haqGjvZQdBR5Vc7pyx2JDttI=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "755f5aa91337890c432639c60b6064bb7fe67769",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-25.11",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "cavekit-src": "cavekit-src",
+        "nix-dev-shell-agentic-stub": "nix-dev-shell-agentic-stub",
+        "nix-lefthook-git-conflict-markers": "nix-lefthook-git-conflict-markers",
+        "nix-lefthook-git-no-local-paths": "nix-lefthook-git-no-local-paths",
+        "nix-lefthook-missing-final-newline": "nix-lefthook-missing-final-newline",
+        "nix-lefthook-nix-no-embedded-shell": "nix-lefthook-nix-no-embedded-shell",
+        "nix-lefthook-statix": "nix-lefthook-statix",
+        "nix-lefthook-trailing-whitespace": "nix-lefthook-trailing-whitespace",
+        "nixpkgs": "nixpkgs"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
