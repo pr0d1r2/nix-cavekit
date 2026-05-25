@@ -117,7 +117,7 @@
         };
       });
 
-      devShells = forAllSystems (pkgs: {
+      devShells = forAllSystems (pkgs: rec {
         default = pkgs.mkShell {
           packages = [
             nix-lefthook-git-conflict-markers.packages.${pkgs.stdenv.hostPlatform.system}.default
@@ -138,6 +138,7 @@
           ];
           shellHook = builtins.readFile ./dev.sh;
         };
+        ci = default;
       });
     };
 }

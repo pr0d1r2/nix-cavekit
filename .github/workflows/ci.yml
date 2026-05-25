@@ -13,25 +13,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - uses: cachix/install-nix-action@v31
+      - uses: pr0d1r2/nix-lefthook-ci-action@32892bc5cf97ca61aaa012e2cef486f1f9fb96c5
         with:
-          extra_nix_config: |
-            experimental-features = nix-command flakes
-      - name: Build
-        run: nix build
-      - name: Pre-commit checks
-        run: TERM=dumb nix develop --ignore-environment --keep TERM --command bash -c 'LEFTHOOK_NIX_FLAKE_CHECK_TIMEOUT=300 lefthook run pre-commit --all-files'
+          skip-lefthook: 'true'
+
+  build-linux-arm:
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@v6
+      - uses: pr0d1r2/nix-lefthook-ci-action@32892bc5cf97ca61aaa012e2cef486f1f9fb96c5
+        with:
+          skip-lefthook: 'true'
 
   build-macos:
     if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v6
-      - uses: cachix/install-nix-action@v31
+      - uses: pr0d1r2/nix-lefthook-ci-action@32892bc5cf97ca61aaa012e2cef486f1f9fb96c5
         with:
-          extra_nix_config: |
-            experimental-features = nix-command flakes
-      - name: Build
-        run: nix build
-      - name: Pre-commit checks
-        run: TERM=dumb nix develop --ignore-environment --keep TERM --command bash -c 'LEFTHOOK_NIX_FLAKE_CHECK_TIMEOUT=300 lefthook run pre-commit --all-files'
+          skip-lefthook: 'true'
