@@ -13,17 +13,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - uses: pr0d1r2/nix-lefthook-ci-action@fc0c391434c5603e8289549b3cc91f922896cc51
+      - uses: pr0d1r2/nix-lefthook-ci-action@32892bc5cf97ca61aaa012e2cef486f1f9fb96c5
         with:
           flake-check-timeout: '300'
-          devshell: 'default'
+
+  build-linux-arm:
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@v6
+      - uses: pr0d1r2/nix-lefthook-ci-action@32892bc5cf97ca61aaa012e2cef486f1f9fb96c5
+        with:
+          flake-check-timeout: '300'
+          skip-lefthook: 'true'
 
   build-macos:
     if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v6
-      - uses: pr0d1r2/nix-lefthook-ci-action@fc0c391434c5603e8289549b3cc91f922896cc51
+      - uses: pr0d1r2/nix-lefthook-ci-action@32892bc5cf97ca61aaa012e2cef486f1f9fb96c5
         with:
           flake-check-timeout: '300'
-          devshell: 'default'
