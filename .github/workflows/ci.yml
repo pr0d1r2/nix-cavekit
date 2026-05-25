@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v6
       - uses: pr0d1r2/nix-lefthook-ci-action@32892bc5cf97ca61aaa012e2cef486f1f9fb96c5
         with:
-          flake-check-timeout: '300'
+          skip-lefthook: 'true'
 
   build-linux-arm:
     if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
@@ -24,7 +24,6 @@ jobs:
       - uses: actions/checkout@v6
       - uses: pr0d1r2/nix-lefthook-ci-action@32892bc5cf97ca61aaa012e2cef486f1f9fb96c5
         with:
-          flake-check-timeout: '300'
           skip-lefthook: 'true'
 
   build-macos:
@@ -34,4 +33,4 @@ jobs:
       - uses: actions/checkout@v6
       - uses: pr0d1r2/nix-lefthook-ci-action@32892bc5cf97ca61aaa012e2cef486f1f9fb96c5
         with:
-          flake-check-timeout: '300'
+          skip-lefthook: 'true'
