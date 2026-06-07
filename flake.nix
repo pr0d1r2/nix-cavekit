@@ -2,7 +2,8 @@
   description = "Nix package for cavekit — spec-driven development toolkit";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs-lock.url = "github:pr0d1r2/nixpkgs-lock";
+    nixpkgs.follows = "nixpkgs-lock/nixpkgs";
     cavekit-src = {
       url = "github:JuliusBrussee/cavekit";
       flake = false;
