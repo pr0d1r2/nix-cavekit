@@ -79,7 +79,7 @@ inputs.nix-cavekit = {
 | status | id | goal |
 |---|---|---|
 | `x` | T1 | Add `nix flake check` tests to verify the package builds and installs expected files |
-| `.` | T2 | Add a CLAUDE.md with build/test/lint instructions for AI agent context |
+| `x` | T2 | Add a CLAUDE.md with build/test/lint instructions for AI agent context |
 | `.` | T3 | Update `update-pins.yml` to also pin-update `cavekit-src` and all `nix-lefthook-*-src` inputs |
 | `.` | T4 | Align `actions/checkout` version in `update-pins.yml` (v4) with `ci.yml` (v6) |
 | `.` | T5 | Add a `nix-lefthook-markdownlint` remote hook to lefthook.yml or document why it is omitted |
