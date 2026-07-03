@@ -44,7 +44,7 @@ Pre-commit hooks run automatically via lefthook on `git commit`. To run all hook
 lefthook run pre-commit
 ```
 
-Hooks enforce: nixfmt, statix, deadnix, nix-no-embedded-shell, yamllint, typos, editorconfig-checker, trailing-whitespace, missing-final-newline, git-conflict-markers, git-no-local-paths, nix-flake-check.
+Hooks enforce: nixfmt, statix, deadnix, nix-no-embedded-shell, yamllint, typos, editorconfig-checker, markdownlint, trailing-whitespace, missing-final-newline, git-conflict-markers, git-no-local-paths, nix-flake-check.
 
 ## File formatting
 
