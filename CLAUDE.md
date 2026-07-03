@@ -12,7 +12,7 @@ Nix with `nix-command` and `flakes` experimental features enabled.
 nix develop
 ```
 
-Enters the devShell with all tools (nixfmt, deadnix, statix, typos, yamllint, editorconfig-checker, lefthook) and installs pre-commit hooks via lefthook.
+Enters the devShell with all tools (nixfmt, deadnix, typos, yamllint, editorconfig-checker, lefthook) and installs pre-commit hooks via lefthook.
 
 ## Build
 
