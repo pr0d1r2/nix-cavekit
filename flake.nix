@@ -121,6 +121,14 @@
         install-validation = pkgs.runCommand "install-validation-check" {
           installScript = builtins.readFile ./install-plugin.sh;
         } (builtins.readFile ./check-install-validation.sh);
+        shellcheck-scripts = pkgs.runCommand "shellcheck-scripts-check" {
+          nativeBuildInputs = [ pkgs.shellcheck ];
+          devScript = ./dev.sh;
+          installScript = ./install-plugin.sh;
+          checkPackageScript = ./check-package.sh;
+          checkInstallScript = ./check-install-validation.sh;
+          checkShellcheckScript = ./check-shellcheck.sh;
+        } (builtins.readFile ./check-shellcheck.sh);
       });
 
       devShells = forAllSystems (pkgs: {
@@ -133,6 +141,7 @@
             pkgs.lefthook
             pkgs.nix
             pkgs.nixfmt
+            pkgs.shellcheck
             pkgs.typos
             pkgs.yamllint
           ]
@@ -146,6 +155,7 @@
             pkgs.git
             pkgs.nix
             pkgs.nixfmt
+            pkgs.shellcheck
             pkgs.typos
             pkgs.yamllint
           ];

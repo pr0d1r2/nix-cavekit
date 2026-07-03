@@ -1,14 +1,14 @@
 ## §D — Description
 
-nix-cavekit is a Nix flake that packages [cavekit](https://github.com/JuliusBrussee/cavekit), a spec-driven development toolkit for AI coding agents, for use in Nix-based development environments. It provides a buildable Nix package that installs the cavekit plugin (commands, skills, and plugin metadata), a development shell with code-quality tooling (nixfmt, deadnix, statix, typos, yamllint, editorconfig-checker, markdownlint) and seven lefthook wrapper scripts for git pre-commit hooks, and CI workflows for multi-platform builds and automated dependency pin updates. Target users are Nix developers who want to integrate cavekit into their flake-based projects.
+nix-cavekit is a Nix flake that packages [cavekit](https://github.com/JuliusBrussee/cavekit), a spec-driven development toolkit for AI coding agents, for use in Nix-based development environments. It provides a buildable Nix package that installs the cavekit plugin (commands, skills, and plugin metadata), a development shell with code-quality tooling (nixfmt, deadnix, statix, typos, yamllint, editorconfig-checker, markdownlint, shellcheck) and seven lefthook wrapper scripts for git pre-commit hooks, and CI workflows for multi-platform builds and automated dependency pin updates. Target users are Nix developers who want to integrate cavekit into their flake-based projects.
 
 ## §V — Invariants
 
 1. The flake must evaluate and build on all four supported systems: `aarch64-darwin`, `x86_64-darwin`, `x86_64-linux`, `aarch64-linux`.
 2. `nix flake check --no-build` must pass (structural validity of the flake).
 3. The `packages.default` derivation must successfully copy `plugin.json`, `FORMAT.md`, `commands/`, `skills/`, and `.claude-plugin/` from the upstream cavekit source.
-4. The `devShells.default` must provide all tools listed in its `packages`: coreutils, deadnix, editorconfig-checker, git, lefthook, nix, nixfmt, typos, yamllint, plus all seven lefthook wrapper scripts.
-5. All shell scripts (`dev.sh`, `install-plugin.sh`) must pass ShellCheck validation (`# shellcheck shell=bash`).
+4. The `devShells.default` must provide all tools listed in its `packages`: coreutils, deadnix, editorconfig-checker, git, lefthook, nix, nixfmt, shellcheck, typos, yamllint, plus all seven lefthook wrapper scripts.
+5. All shell scripts (`dev.sh`, `install-plugin.sh`, `check-package.sh`, `check-install-validation.sh`, `check-shellcheck.sh`) must pass ShellCheck validation (`# shellcheck shell=bash`).
 6. Nix files must contain no embedded shell code (enforced by `lefthook-nix-no-embedded-shell` hook).
 7. Nix files must pass nixfmt, statix, and deadnix linting (enforced by lefthook remotes).
 8. YAML files must pass yamllint with the project's `.yamllint.yml` config (line-length disabled, truthy check-keys disabled).
@@ -68,7 +68,7 @@ inputs.nix-cavekit = {
 |---|---|---|
 | `flake.nix` | Nix | Flake definition with inputs, packages, and devShells |
 | `flake.lock` | JSON | Pinned dependency versions |
-| `lefthook.yml` | YAML | 13 remote lefthook hook configurations |
+| `lefthook.yml` | YAML | 14 remote lefthook hook configurations |
 | `.editorconfig` | INI | Editor formatting rules |
 | `.yamllint.yml` | YAML | yamllint config |
 | `.markdownlint.yml` | YAML | markdownlint config |
@@ -86,14 +86,14 @@ inputs.nix-cavekit = {
 | `x` | T5 | Add a `nix-lefthook-markdownlint` remote hook to lefthook.yml or document why it is omitted |
 | `x` | T6 | Differentiate `devShells.ci` from `default` (e.g., exclude interactive tools, add CI-only checks) or remove the alias |
 | `x` | T7 | Add input validation in `install-plugin.sh` to fail clearly if expected upstream paths are missing |
-| `.` | T8 | Add a `nix-lefthook-shellcheck` remote hook to lint `dev.sh` and `install-plugin.sh` on commit |
+| `x` | T8 | Add a `nix-lefthook-shellcheck` remote hook to lint `dev.sh` and `install-plugin.sh` on commit |
 | `.` | T9 | Document all seven lefthook wrapper scripts in README.md for downstream consumers |
 
 ## §B — Bugs / Known Issues
 
-1. **checkout version mismatch**: `update-pins.yml` uses `actions/checkout@v4` while `ci.yml` uses `actions/checkout@v6`. This is inconsistent and `v4` may miss security or feature fixes.
-2. **Partial pin update coverage**: The `update-pins.yml` workflow only runs `nix flake update nixpkgs-lock`. The seven `nix-lefthook-*-src` and `cavekit-src` inputs are never automatically updated, so they can drift silently.
-3. **No build output verification**: There are no tests that the `packages.default` derivation actually produces the expected file layout. If cavekit upstream renames or removes `plugin.json`, `commands/`, `skills/`, or `.claude-plugin/`, the build may fail or produce an incomplete result with no early signal.
+1. ~~**checkout version mismatch**~~: Fixed — both `ci.yml` and `update-pins.yml` now use `actions/checkout@v6`.
+2. ~~**Partial pin update coverage**~~: Fixed — `update-pins.yml` now updates all flake inputs (`nixpkgs-lock`, `cavekit-src`, and all `nix-lefthook-*-src`).
+3. ~~**No build output verification**~~: Fixed — the `package-files` check verifies the expected file layout in the build output.
 4. **Fragile `nix-no-embedded-shell` wrapper**: The `lefthook-nix-no-embedded-shell` wrapper injects a `SCANNER` variable via string concatenation before the upstream script body. If the upstream script changes its assumptions about how `SCANNER` is set, this will break silently.
 5. ~~**`ci` devShell is an exact alias**~~: Fixed — `ci` is now a separate derivation excluding lefthook, its wrappers, editorconfig-checker, and the shellHook.
 6. **No `deadnix` lefthook wrapper**: `deadnix` is listed in lefthook remotes and as a devShell package, but unlike statix it has no corresponding `lefthookWrappersFor` entry. This is correct (the remote runs `deadnix` directly) but inconsistent with how statix is handled (which has both a remote and a wrapper).
