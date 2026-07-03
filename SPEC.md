@@ -87,7 +87,7 @@ inputs.nix-cavekit = {
 | `x` | T6 | Differentiate `devShells.ci` from `default` (e.g., exclude interactive tools, add CI-only checks) or remove the alias |
 | `x` | T7 | Add input validation in `install-plugin.sh` to fail clearly if expected upstream paths are missing |
 | `x` | T8 | Add a `nix-lefthook-shellcheck` remote hook to lint `dev.sh` and `install-plugin.sh` on commit |
-| `.` | T9 | Document all seven lefthook wrapper scripts in README.md for downstream consumers |
+| `x` | T9 | Document all seven lefthook wrapper scripts in README.md for downstream consumers |
 
 ## §B — Bugs / Known Issues
 
