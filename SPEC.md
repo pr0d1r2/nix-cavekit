@@ -81,7 +81,7 @@ inputs.nix-cavekit = {
 | `x` | T1 | Add `nix flake check` tests to verify the package builds and installs expected files |
 | `x` | T2 | Add a CLAUDE.md with build/test/lint instructions for AI agent context |
 | `x` | T3 | Update `update-pins.yml` to also pin-update `cavekit-src` and all `nix-lefthook-*-src` inputs |
-| `.` | T4 | Align `actions/checkout` version in `update-pins.yml` (v4) with `ci.yml` (v6) |
+| `x` | T4 | Align `actions/checkout` version in `update-pins.yml` (v4) with `ci.yml` (v6) |
 | `.` | T5 | Add a `nix-lefthook-markdownlint` remote hook to lefthook.yml or document why it is omitted |
 | `.` | T6 | Differentiate `devShells.ci` from `default` (e.g., exclude interactive tools, add CI-only checks) or remove the alias |
 | `.` | T7 | Add input validation in `install-plugin.sh` to fail clearly if expected upstream paths are missing |
