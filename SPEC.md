@@ -29,7 +29,7 @@ Builds the cavekit plugin. Installs `plugin.json`, `FORMAT.md`, `commands/`, `sk
 
 ```
 devShells.<system>.default : derivation
-devShells.<system>.ci      : derivation  (alias for default)
+devShells.<system>.ci      : derivation  (CI-focused: no lefthook, no wrappers, no editorconfig-checker, no shellHook)
 ```
 
 Development shell with code-quality tools and lefthook hooks.
@@ -84,7 +84,7 @@ inputs.nix-cavekit = {
 | `x` | T3 | Update `update-pins.yml` to also pin-update `cavekit-src` and all `nix-lefthook-*-src` inputs |
 | `x` | T4 | Align `actions/checkout` version in `update-pins.yml` (v4) with `ci.yml` (v6) |
 | `x` | T5 | Add a `nix-lefthook-markdownlint` remote hook to lefthook.yml or document why it is omitted |
-| `.` | T6 | Differentiate `devShells.ci` from `default` (e.g., exclude interactive tools, add CI-only checks) or remove the alias |
+| `x` | T6 | Differentiate `devShells.ci` from `default` (e.g., exclude interactive tools, add CI-only checks) or remove the alias |
 | `.` | T7 | Add input validation in `install-plugin.sh` to fail clearly if expected upstream paths are missing |
 | `.` | T8 | Add a `nix-lefthook-shellcheck` remote hook to lint `dev.sh` and `install-plugin.sh` on commit |
 | `.` | T9 | Document all seven lefthook wrapper scripts in README.md for downstream consumers |
@@ -95,5 +95,5 @@ inputs.nix-cavekit = {
 2. **Partial pin update coverage**: The `update-pins.yml` workflow only runs `nix flake update nixpkgs-lock`. The seven `nix-lefthook-*-src` and `cavekit-src` inputs are never automatically updated, so they can drift silently.
 3. **No build output verification**: There are no tests that the `packages.default` derivation actually produces the expected file layout. If cavekit upstream renames or removes `plugin.json`, `commands/`, `skills/`, or `.claude-plugin/`, the build may fail or produce an incomplete result with no early signal.
 4. **Fragile `nix-no-embedded-shell` wrapper**: The `lefthook-nix-no-embedded-shell` wrapper injects a `SCANNER` variable via string concatenation before the upstream script body. If the upstream script changes its assumptions about how `SCANNER` is set, this will break silently.
-5. **`ci` devShell is an exact alias**: `ci = default` provides no distinction. CI runs with `skip-lefthook: 'true'` anyway, so the lefthook wrappers bundled in the shell are dead weight in CI context.
+5. ~~**`ci` devShell is an exact alias**~~: Fixed — `ci` is now a separate derivation excluding lefthook, its wrappers, editorconfig-checker, and the shellHook.
 6. **No `deadnix` lefthook wrapper**: `deadnix` is listed in lefthook remotes and as a devShell package, but unlike statix it has no corresponding `lefthookWrappersFor` entry. This is correct (the remote runs `deadnix` directly) but inconsistent with how statix is handled (which has both a remote and a wrapper).
