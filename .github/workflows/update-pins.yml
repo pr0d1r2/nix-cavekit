@@ -23,6 +23,7 @@ jobs:
             cavekit-src \
             nix-lefthook-git-conflict-markers-src \
             nix-lefthook-git-no-local-paths-src \
+            nix-lefthook-markdownlint-src \
             nix-lefthook-missing-final-newline-src \
             nix-lefthook-nix-no-embedded-shell-src \
             nix-lefthook-trailing-whitespace-src \
