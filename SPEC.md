@@ -85,7 +85,7 @@ inputs.nix-cavekit = {
 | `x` | T4 | Align `actions/checkout` version in `update-pins.yml` (v4) with `ci.yml` (v6) |
 | `x` | T5 | Add a `nix-lefthook-markdownlint` remote hook to lefthook.yml or document why it is omitted |
 | `x` | T6 | Differentiate `devShells.ci` from `default` (e.g., exclude interactive tools, add CI-only checks) or remove the alias |
-| `.` | T7 | Add input validation in `install-plugin.sh` to fail clearly if expected upstream paths are missing |
+| `x` | T7 | Add input validation in `install-plugin.sh` to fail clearly if expected upstream paths are missing |
 | `.` | T8 | Add a `nix-lefthook-shellcheck` remote hook to lint `dev.sh` and `install-plugin.sh` on commit |
 | `.` | T9 | Document all seven lefthook wrapper scripts in README.md for downstream consumers |
 

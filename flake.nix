@@ -118,6 +118,9 @@
         package-files = pkgs.runCommand "cavekit-plugin-check" {
           cavekitPkg = mkCavekitPlugin pkgs;
         } (builtins.readFile ./check-package.sh);
+        install-validation = pkgs.runCommand "install-validation-check" {
+          installScript = builtins.readFile ./install-plugin.sh;
+        } (builtins.readFile ./check-install-validation.sh);
       });
 
       devShells = forAllSystems (pkgs: {
