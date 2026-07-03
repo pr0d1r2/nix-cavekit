@@ -3,11 +3,11 @@
     "cavekit-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1779057594,
-        "narHash": "sha256-v2PQLniihq8XOM6/GrIMlZ1gGR7gSkajU4SZgeMDwzo=",
+        "lastModified": 1781762400,
+        "narHash": "sha256-7KXazRLxZoH85qXI3qHMl++B35QdrJhkGv9IGa7Y3Xw=",
         "owner": "JuliusBrussee",
         "repo": "cavekit",
-        "rev": "823ad0437d03134f1ce6eb46baeb2145e18e95ad",
+        "rev": "c322f0bb6db82163041930467f3ce32754d42827",
         "type": "github"
       },
       "original": {
@@ -35,11 +35,11 @@
     "nix-lefthook-git-no-local-paths-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1780827867,
-        "narHash": "sha256-rlfdsT2b6LfVEkNSy/dU6uwwSvtrI2I8L/s/cu/O4Ms=",
+        "lastModified": 1782971023,
+        "narHash": "sha256-EoVpIu1Du54emdaTdliTe3MD/d/qTOlAxK97CYudJmU=",
         "owner": "pr0d1r2",
         "repo": "nix-lefthook-git-no-local-paths",
-        "rev": "f92909985c6bd274aa2ea11393f583f488af2693",
+        "rev": "30a4e32af0689b6e1c69ebb9a813f4ca030204bb",
         "type": "github"
       },
       "original": {
@@ -83,11 +83,11 @@
     "nix-lefthook-nix-no-embedded-shell-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1780831514,
-        "narHash": "sha256-SuULDiCobUNyNkDH6ZvKTqmTM/Uee/mLMbvQVwMmqm4=",
+        "lastModified": 1780950697,
+        "narHash": "sha256-V/O0AP0R1qO+GyE+PQXaHU3XZwwmLjQZ/YtXVm4d4NQ=",
         "owner": "pr0d1r2",
         "repo": "nix-lefthook-nix-no-embedded-shell",
-        "rev": "5f51bfa90d169ae1b6559bbf36112d555e35c5c9",
+        "rev": "da1186e8d3d99d805cd6b00d49c62932a2fcfd16",
         "type": "github"
       },
       "original": {
@@ -99,11 +99,11 @@
     "nix-lefthook-statix-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1780823521,
-        "narHash": "sha256-0kt5TkuLWgTuUipmLwbNWpoz8OGHRcPXq3LA1Cn2Io8=",
+        "lastModified": 1780950712,
+        "narHash": "sha256-0Urvr5KCC6zVFYWuJLci/yLIaYesLbSLTah+zT2NMkk=",
         "owner": "pr0d1r2",
         "repo": "nix-lefthook-statix",
-        "rev": "aa4a4294eebc4137c0d1af4a0a572992a425bee2",
+        "rev": "c8cc547971630f62af947a01d2266d4dba6e7d23",
         "type": "github"
       },
       "original": {

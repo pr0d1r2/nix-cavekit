@@ -91,9 +91,5 @@ inputs.nix-cavekit = {
 
 ## §B — Bugs / Known Issues
 
-1. ~~**checkout version mismatch**~~: Fixed — both `ci.yml` and `update-pins.yml` now use `actions/checkout@v6`.
-2. ~~**Partial pin update coverage**~~: Fixed — `update-pins.yml` now updates all flake inputs (`nixpkgs-lock`, `cavekit-src`, and all `nix-lefthook-*-src`).
-3. ~~**No build output verification**~~: Fixed — the `package-files` check verifies the expected file layout in the build output.
-4. **Fragile `nix-no-embedded-shell` wrapper**: The `lefthook-nix-no-embedded-shell` wrapper injects a `SCANNER` variable via string concatenation before the upstream script body. If the upstream script changes its assumptions about how `SCANNER` is set, this will break silently.
-5. ~~**`ci` devShell is an exact alias**~~: Fixed — `ci` is now a separate derivation excluding lefthook, its wrappers, editorconfig-checker, and the shellHook.
-6. **No `deadnix` lefthook wrapper**: `deadnix` is listed in lefthook remotes and as a devShell package, but unlike statix it has no corresponding `lefthookWrappersFor` entry. This is correct (the remote runs `deadnix` directly) but inconsistent with how statix is handled (which has both a remote and a wrapper).
+1. **Fragile `nix-no-embedded-shell` wrapper**: The `lefthook-nix-no-embedded-shell` wrapper injects a `SCANNER` variable via string concatenation before the upstream script body. This is the documented upstream integration pattern, but if the upstream script changes its assumptions about how `SCANNER` is set, the wrapper will break silently.
+2. **No `deadnix` lefthook wrapper**: `deadnix` is listed in lefthook remotes and as a devShell package, but unlike statix it has no corresponding `lefthookWrappersFor` entry. This is correct (the remote runs `deadnix` directly) but inconsistent with how statix is handled (which has both a remote and a wrapper).

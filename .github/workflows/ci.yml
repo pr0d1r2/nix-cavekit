@@ -12,8 +12,8 @@ jobs:
   build-linux:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
-      - uses: pr0d1r2/nix-lefthook-ci-action@32892bc5cf97ca61aaa012e2cef486f1f9fb96c5
+      - uses: actions/checkout@v7
+      - uses: pr0d1r2/nix-lefthook-ci-action@ce9a118b05e90e186dba48a82067adeed185f7d4
         with:
           skip-lefthook: 'true'
 
@@ -21,8 +21,8 @@ jobs:
     if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-24.04-arm
     steps:
-      - uses: actions/checkout@v6
-      - uses: pr0d1r2/nix-lefthook-ci-action@32892bc5cf97ca61aaa012e2cef486f1f9fb96c5
+      - uses: actions/checkout@v7
+      - uses: pr0d1r2/nix-lefthook-ci-action@ce9a118b05e90e186dba48a82067adeed185f7d4
         with:
           skip-lefthook: 'true'
 
@@ -30,7 +30,7 @@ jobs:
     if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v6
-      - uses: pr0d1r2/nix-lefthook-ci-action@32892bc5cf97ca61aaa012e2cef486f1f9fb96c5
+      - uses: actions/checkout@v7
+      - uses: pr0d1r2/nix-lefthook-ci-action@ce9a118b05e90e186dba48a82067adeed185f7d4
         with:
           skip-lefthook: 'true'
