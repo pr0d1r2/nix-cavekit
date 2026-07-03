@@ -120,7 +120,7 @@
         } (builtins.readFile ./check-package.sh);
       });
 
-      devShells = forAllSystems (pkgs: rec {
+      devShells = forAllSystems (pkgs: {
         default = pkgs.mkShell {
           packages = [
             pkgs.coreutils
@@ -136,7 +136,17 @@
           ++ (lefthookWrappersFor pkgs);
           shellHook = builtins.readFile ./dev.sh;
         };
-        ci = default;
+        ci = pkgs.mkShell {
+          packages = [
+            pkgs.coreutils
+            pkgs.deadnix
+            pkgs.git
+            pkgs.nix
+            pkgs.nixfmt
+            pkgs.typos
+            pkgs.yamllint
+          ];
+        };
       });
     };
 }

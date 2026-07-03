@@ -14,6 +14,12 @@ nix develop
 
 Enters the devShell with all tools (nixfmt, deadnix, typos, yamllint, editorconfig-checker, lefthook) and installs pre-commit hooks via lefthook.
 
+For CI (no interactive tools, no lefthook):
+
+```sh
+nix develop .#ci
+```
+
 ## Build
 
 ```sh
