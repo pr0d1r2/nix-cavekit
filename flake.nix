@@ -56,6 +56,15 @@
       forAllSystems =
         f: nixpkgs.lib.genAttrs supportedSystems (system: f nixpkgs.legacyPackages.${system});
 
+      mkCavekitPlugin =
+        pkgs:
+        pkgs.stdenvNoCC.mkDerivation {
+          name = "cavekit-plugin";
+          src = cavekit-src;
+          dontBuild = true;
+          installPhase = builtins.readFile ./install-plugin.sh;
+        };
+
       lefthookWrappersFor =
         pkgs:
         let
@@ -94,12 +103,13 @@
     in
     {
       packages = forAllSystems (pkgs: {
-        default = pkgs.stdenvNoCC.mkDerivation {
-          name = "cavekit-plugin";
-          src = cavekit-src;
-          dontBuild = true;
-          installPhase = builtins.readFile ./install-plugin.sh;
-        };
+        default = mkCavekitPlugin pkgs;
+      });
+
+      checks = forAllSystems (pkgs: {
+        package-files = pkgs.runCommand "cavekit-plugin-check" {
+          cavekitPkg = mkCavekitPlugin pkgs;
+        } (builtins.readFile ./check-package.sh);
       });
 
       devShells = forAllSystems (pkgs: rec {
