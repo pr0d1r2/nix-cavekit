@@ -3,7 +3,7 @@
 # shellcheck disable=SC2154
 
 tmpdir=$(mktemp -d)
-printf '%s\n' "$installScript" > "$tmpdir/test-install.sh"
+printf '%s\n' "$installScript" >"$tmpdir/test-install.sh"
 
 if (cd "$tmpdir" && out="$tmpdir/test-out" bash test-install.sh) 2>"$tmpdir/stderr.log"; then
   echo "FAIL: install-plugin.sh should fail when no upstream paths exist" >&2

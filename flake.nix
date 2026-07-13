@@ -8,6 +8,10 @@
       url = "github:JuliusBrussee/cavekit";
       flake = false;
     };
+    nix-lefthook-editorconfig-checker-src = {
+      url = "github:pr0d1r2/nix-lefthook-editorconfig-checker";
+      flake = false;
+    };
     nix-lefthook-git-conflict-markers-src = {
       url = "github:pr0d1r2/nix-lefthook-git-conflict-markers";
       flake = false;
@@ -16,24 +20,44 @@
       url = "github:pr0d1r2/nix-lefthook-git-no-local-paths";
       flake = false;
     };
+    nix-lefthook-markdownlint-src = {
+      url = "github:pr0d1r2/nix-lefthook-markdownlint";
+      flake = false;
+    };
     nix-lefthook-missing-final-newline-src = {
       url = "github:pr0d1r2/nix-lefthook-missing-final-newline";
+      flake = false;
+    };
+    nix-lefthook-deadnix-src = {
+      url = "github:pr0d1r2/nix-lefthook-deadnix";
+      flake = false;
+    };
+    nix-lefthook-nixfmt-src = {
+      url = "github:pr0d1r2/nix-lefthook-nixfmt";
       flake = false;
     };
     nix-lefthook-nix-no-embedded-shell-src = {
       url = "github:pr0d1r2/nix-lefthook-nix-no-embedded-shell";
       flake = false;
     };
-    nix-lefthook-trailing-whitespace-src = {
-      url = "github:pr0d1r2/nix-lefthook-trailing-whitespace";
-      flake = false;
-    };
-    nix-lefthook-markdownlint-src = {
-      url = "github:pr0d1r2/nix-lefthook-markdownlint";
+    nix-lefthook-shellcheck-src = {
+      url = "github:pr0d1r2/nix-lefthook-shellcheck";
       flake = false;
     };
     nix-lefthook-statix-src = {
       url = "github:pr0d1r2/nix-lefthook-statix";
+      flake = false;
+    };
+    nix-lefthook-trailing-whitespace-src = {
+      url = "github:pr0d1r2/nix-lefthook-trailing-whitespace";
+      flake = false;
+    };
+    nix-lefthook-typos-src = {
+      url = "github:pr0d1r2/nix-lefthook-typos";
+      flake = false;
+    };
+    nix-lefthook-yamllint-src = {
+      url = "github:pr0d1r2/nix-lefthook-yamllint";
       flake = false;
     };
   };
@@ -42,13 +66,19 @@
     {
       nixpkgs,
       cavekit-src,
+      nix-lefthook-deadnix-src,
+      nix-lefthook-editorconfig-checker-src,
       nix-lefthook-git-conflict-markers-src,
       nix-lefthook-git-no-local-paths-src,
       nix-lefthook-markdownlint-src,
       nix-lefthook-missing-final-newline-src,
+      nix-lefthook-nixfmt-src,
       nix-lefthook-nix-no-embedded-shell-src,
-      nix-lefthook-trailing-whitespace-src,
+      nix-lefthook-shellcheck-src,
       nix-lefthook-statix-src,
+      nix-lefthook-trailing-whitespace-src,
+      nix-lefthook-typos-src,
+      nix-lefthook-yamllint-src,
       ...
     }:
     let
@@ -84,6 +114,12 @@
             );
         in
         [
+          (wrap "lefthook-deadnix" nix-lefthook-deadnix-src {
+            runtimeInputs = [ pkgs.deadnix ];
+          })
+          (wrap "lefthook-editorconfig-checker" nix-lefthook-editorconfig-checker-src {
+            runtimeInputs = [ pkgs.editorconfig-checker ];
+          })
           (wrap "lefthook-git-conflict-markers" nix-lefthook-git-conflict-markers-src {
             runtimeInputs = [ pkgs.gnugrep ];
           })
@@ -94,6 +130,9 @@
             runtimeInputs = [ pkgs.markdownlint-cli ];
           })
           (wrap "lefthook-missing-final-newline" nix-lefthook-missing-final-newline-src { })
+          (wrap "lefthook-nixfmt" nix-lefthook-nixfmt-src {
+            runtimeInputs = [ pkgs.nixfmt ];
+          })
           (pkgs.writeShellApplication {
             name = "lefthook-nix-no-embedded-shell";
             text = ''
@@ -101,11 +140,20 @@
             ''
             + builtins.readFile "${nix-lefthook-nix-no-embedded-shell-src}/lefthook-nix-no-embedded-shell.sh";
           })
+          (wrap "lefthook-shellcheck" nix-lefthook-shellcheck-src {
+            runtimeInputs = [ pkgs.shellcheck ];
+          })
           (wrap "lefthook-statix" nix-lefthook-statix-src {
             runtimeInputs = [ pkgs.statix ];
           })
           (wrap "lefthook-trailing-whitespace" nix-lefthook-trailing-whitespace-src {
             runtimeInputs = [ pkgs.gnugrep ];
+          })
+          (wrap "lefthook-typos" nix-lefthook-typos-src {
+            runtimeInputs = [ pkgs.typos ];
+          })
+          (wrap "lefthook-yamllint" nix-lefthook-yamllint-src {
+            runtimeInputs = [ pkgs.yamllint ];
           })
         ];
     in
