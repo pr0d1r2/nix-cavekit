@@ -44,6 +44,10 @@
       url = "github:pr0d1r2/nix-lefthook-shellcheck";
       flake = false;
     };
+    nix-lefthook-shfmt-src = {
+      url = "github:pr0d1r2/nix-lefthook-shfmt";
+      flake = false;
+    };
     nix-lefthook-statix-src = {
       url = "github:pr0d1r2/nix-lefthook-statix";
       flake = false;
@@ -75,6 +79,7 @@
       nix-lefthook-nixfmt-src,
       nix-lefthook-nix-no-embedded-shell-src,
       nix-lefthook-shellcheck-src,
+      nix-lefthook-shfmt-src,
       nix-lefthook-statix-src,
       nix-lefthook-trailing-whitespace-src,
       nix-lefthook-typos-src,
@@ -143,6 +148,9 @@
           (wrap "lefthook-shellcheck" nix-lefthook-shellcheck-src {
             runtimeInputs = [ pkgs.shellcheck ];
           })
+          (wrap "lefthook-shfmt" nix-lefthook-shfmt-src {
+            runtimeInputs = [ pkgs.shfmt ];
+          })
           (wrap "lefthook-statix" nix-lefthook-statix-src {
             runtimeInputs = [ pkgs.statix ];
           })
@@ -176,7 +184,17 @@
           checkPackageScript = ./check-package.sh;
           checkInstallScript = ./check-install-validation.sh;
           checkShellcheckScript = ./check-shellcheck.sh;
+          checkShfmtScript = ./check-shfmt.sh;
         } (builtins.readFile ./check-shellcheck.sh);
+        shfmt-format = pkgs.runCommand "shfmt-format-check" {
+          nativeBuildInputs = [ pkgs.shfmt ];
+          devScript = ./dev.sh;
+          installScript = ./install-plugin.sh;
+          checkPackageScript = ./check-package.sh;
+          checkInstallScript = ./check-install-validation.sh;
+          checkShellcheckScript = ./check-shellcheck.sh;
+          checkShfmtScript = ./check-shfmt.sh;
+        } (builtins.readFile ./check-shfmt.sh);
       });
 
       devShells = forAllSystems (pkgs: {
@@ -190,6 +208,7 @@
             pkgs.nix
             pkgs.nixfmt
             pkgs.shellcheck
+            pkgs.shfmt
             pkgs.typos
             pkgs.yamllint
           ]
@@ -204,6 +223,7 @@
             pkgs.nix
             pkgs.nixfmt
             pkgs.shellcheck
+            pkgs.shfmt
             pkgs.typos
             pkgs.yamllint
           ];

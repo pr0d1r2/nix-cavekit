@@ -160,6 +160,22 @@
         "type": "github"
       }
     },
+    "nix-lefthook-shfmt-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1783338581,
+        "narHash": "sha256-IBVq89i+P1t1yQl5wce7cgXlL9blTBdWZYNbN9hVeZc=",
+        "owner": "pr0d1r2",
+        "repo": "nix-lefthook-shfmt",
+        "rev": "b923df9bc70d9ab6840c54715650ab6daeb619df",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pr0d1r2",
+        "repo": "nix-lefthook-shfmt",
+        "type": "github"
+      }
+    },
     "nix-lefthook-statix-src": {
       "flake": false,
       "locked": {
@@ -270,6 +286,7 @@
         "nix-lefthook-nix-no-embedded-shell-src": "nix-lefthook-nix-no-embedded-shell-src",
         "nix-lefthook-nixfmt-src": "nix-lefthook-nixfmt-src",
         "nix-lefthook-shellcheck-src": "nix-lefthook-shellcheck-src",
+        "nix-lefthook-shfmt-src": "nix-lefthook-shfmt-src",
         "nix-lefthook-statix-src": "nix-lefthook-statix-src",
         "nix-lefthook-trailing-whitespace-src": "nix-lefthook-trailing-whitespace-src",
         "nix-lefthook-typos-src": "nix-lefthook-typos-src",
