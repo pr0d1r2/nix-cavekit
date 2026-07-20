@@ -1,6 +1,14 @@
+# nix-cavekit
+
 ## §D — Description
 
-nix-cavekit is a Nix flake that packages [cavekit](https://github.com/JuliusBrussee/cavekit), a spec-driven development toolkit for AI coding agents, for use in Nix-based development environments. It provides a buildable Nix package that installs the cavekit plugin (commands, skills, and plugin metadata), a development shell with code-quality tooling (nixfmt, deadnix, statix, typos, yamllint, editorconfig-checker, markdownlint, shellcheck) and seven lefthook wrapper scripts for git pre-commit hooks, and CI workflows for multi-platform builds and automated dependency pin updates. Target users are Nix developers who want to integrate cavekit into their flake-based projects.
+nix-cavekit is a Nix flake that packages [cavekit](https://github.com/JuliusBrussee/cavekit),
+a spec-driven development toolkit for AI coding agents, for use in Nix-based development environments.
+It provides a buildable Nix package that installs the cavekit plugin (commands, skills, and plugin metadata),
+a development shell with code-quality tooling (nixfmt, deadnix, statix, typos, yamllint,
+editorconfig-checker, markdownlint, shellcheck) and seven lefthook wrapper scripts for git pre-commit hooks,
+and CI workflows for multi-platform builds and automated dependency pin updates.
+Target users are Nix developers who want to integrate cavekit into their flake-based projects.
 
 ## §V — Invariants
 
@@ -21,13 +29,13 @@ nix-cavekit is a Nix flake that packages [cavekit](https://github.com/JuliusBrus
 
 ### Flake outputs
 
-```
+```text
 packages.<system>.default  : derivation
 ```
 
 Builds the cavekit plugin. Installs `plugin.json`, `FORMAT.md`, `commands/`, `skills/`, `.claude-plugin/` into `$out/`.
 
-```
+```text
 devShells.<system>.default : derivation
 devShells.<system>.ci      : derivation  (CI-focused: no lefthook, no wrappers, no editorconfig-checker, no shellHook)
 ```
@@ -91,5 +99,9 @@ inputs.nix-cavekit = {
 
 ## §B — Bugs / Known Issues
 
-1. **Fragile `nix-no-embedded-shell` wrapper**: The `lefthook-nix-no-embedded-shell` wrapper injects a `SCANNER` variable via string concatenation before the upstream script body. This is the documented upstream integration pattern, but if the upstream script changes its assumptions about how `SCANNER` is set, the wrapper will break silently.
-2. **No `deadnix` lefthook wrapper**: `deadnix` is listed in lefthook remotes and as a devShell package, but unlike statix it has no corresponding `lefthookWrappersFor` entry. This is correct (the remote runs `deadnix` directly) but inconsistent with how statix is handled (which has both a remote and a wrapper).
+1. **Fragile `nix-no-embedded-shell` wrapper**: Injects `SCANNER` via string concatenation before the upstream script body. Documented pattern, but breaks silently if upstream changes how `SCANNER` is set.
+2. **No `deadnix` lefthook wrapper**: `deadnix` has a lefthook remote but no `lefthookWrappersFor` entry (correct, but inconsistent with statix which has both).
+3. **Broken `packages.default` after migration (2026-07-20)**: Duplicate `default` attribute referencing undefined `mkCavekitPlugin`/`lefthookWrappersFor`. Fixed with a `runCommand` derivation using `install-plugin.sh`.
+4. **Missing `config/lefthook/file_size_limits.yml` (2026-07-20)**: Required by `file-size-check`. Fixed by adding the config matching set-and-setting convention.
+5. **Missing `.nix-embedded-shell-allowlist` (2026-07-20)**: `nix-no-embedded-shell` flagged `flake.nix` for `writeShellApplication` block. Fixed by adding `flake.nix` to the allowlist.
+6. **`apps.confirm` missing materialization packages (2026-07-20)**: Coherence check failed — `lefthook-markdownlint`, `lefthook-markdownlint-agentic`, `lefthook-yamllint` not on PATH. Fixed by adding `mat.packages` to confirm app's `runtimeInputs`.
