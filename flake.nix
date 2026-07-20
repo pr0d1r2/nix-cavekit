@@ -1,5 +1,5 @@
 {
-  description = "CHANGEME";
+  description = "Nix package for cavekit";
 
   nixConfig = {
     extra-substituters = [ "https://pr0d1r2.cachix.org" ];
@@ -78,6 +78,9 @@
 
       checks = forAllSystems (
         pkgs:
+        let
+          sys = pkgs.stdenv.hostPlatform.system;
+        in
         (set-and-setting.lib.checksFor {
           inherit pkgs fragments;
           src = ./.;
@@ -87,6 +90,12 @@
             inherit pkgs;
             projectRoot = ./.;
           };
+          package = pkgs.runCommand "check-package" {
+            cavekitPkg = self.packages.${sys}.default;
+          } (builtins.readFile ./check-package.sh);
+          install-validation = pkgs.runCommand "check-install-validation" {
+            installScript = builtins.readFile ./install-plugin.sh;
+          } (builtins.readFile ./check-install-validation.sh);
           default = pkgs.runCommand "checks" { } "touch $out";
         }
       );
