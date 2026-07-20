@@ -60,7 +60,7 @@
           mat = set-and-setting.lib.materializationFor { inherit pkgs fragments; };
           sys = pkgs.stdenv.hostPlatform.system;
         in
-        set-and-setting.lib.mkDevShells {
+        (set-and-setting.lib.mkDevShells {
           inherit pkgs;
           basePackages = mat.packages;
           settingHook = ''
@@ -73,6 +73,22 @@
             cp -f "$_assemble_out/lefthook.yml" lefthook.yml
             rm -rf "$_assemble_out"
           '';
+        })
+        // {
+          # Compatibility output retained for consumers of the pre-migration flake.
+          ci = pkgs.mkShell {
+            packages = with pkgs; [
+              coreutils
+              deadnix
+              git
+              nix
+              nixfmt
+              shellcheck
+              shfmt
+              typos
+              yamllint
+            ];
+          };
         }
       );
 
@@ -80,12 +96,13 @@
         pkgs:
         let
           sys = pkgs.stdenv.hostPlatform.system;
+          standardChecks = set-and-setting.lib.checksFor {
+            inherit pkgs fragments;
+            src = ./.;
+          };
         in
-        (set-and-setting.lib.checksFor {
-          inherit pkgs fragments;
-          src = ./.;
-        })
-        // {
+        standardChecks
+        // rec {
           dep-graph = set-and-setting.lib.mkDepGraphCheck {
             inherit pkgs;
             projectRoot = ./.;
@@ -93,9 +110,12 @@
           package = pkgs.runCommand "check-package" {
             cavekitPkg = self.packages.${sys}.default;
           } (builtins.readFile ./check-package.sh);
+          package-files = package;
           install-validation = pkgs.runCommand "check-install-validation" {
             installScript = builtins.readFile ./install-plugin.sh;
           } (builtins.readFile ./check-install-validation.sh);
+          shellcheck-scripts = standardChecks.shellcheck;
+          shfmt-format = standardChecks.shfmt;
           default = pkgs.runCommand "checks" { } "touch $out";
         }
       );
