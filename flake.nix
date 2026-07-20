@@ -15,7 +15,7 @@
     cavekit-src = {
       url = "github:JuliusBrussee/cavekit";
       flake = false;
-      };
+    };
   };
 
   outputs =
@@ -47,24 +47,10 @@
     in
     {
       packages = forAllSystems (pkgs: {
-        default = mkCavekitPlugin pkgs;
-        default = pkgs.mkShell {
-          packages = [
-            pkgs.coreutils
-            pkgs.deadnix
-            pkgs.editorconfig-checker
-            pkgs.git
-            pkgs.lefthook
-            pkgs.nix
-            pkgs.nixfmt
-            pkgs.shellcheck
-            pkgs.shfmt
-            pkgs.typos
-            pkgs.yamllint
-          ]
-          ++ (lefthookWrappersFor pkgs);
-          shellHook = builtins.readFile ./dev.sh;
-        };
+        default = pkgs.runCommand "cavekit-plugin" { } ''
+          cd ${cavekit-src}
+          bash ${./install-plugin.sh}
+        '';
         setting = (set-and-setting.lib.mkSetting { inherit pkgs; }).materialized;
       });
 
