@@ -36,6 +36,8 @@
       forAllSystems =
         f: nixpkgs.lib.genAttrs supportedSystems (system: f nixpkgs.legacyPackages.${system});
 
+      sasLib = set-and-setting.inputs.set-and-setting.lib;
+
       fragments = [
         "base"
         "nix"
@@ -51,16 +53,16 @@
           cd ${cavekit-src}
           bash ${./install-plugin.sh}
         '';
-        setting = (set-and-setting.lib.mkSetting { inherit pkgs; }).materialized;
+        setting = (sasLib.mkSetting { inherit pkgs; }).materialized;
       });
 
       devShells = forAllSystems (
         pkgs:
         let
-          mat = set-and-setting.lib.materializationFor { inherit pkgs fragments; };
+          mat = sasLib.materializationFor { inherit pkgs fragments; };
           sys = pkgs.stdenv.hostPlatform.system;
         in
-        (set-and-setting.lib.mkDevShells {
+        (sasLib.mkDevShells {
           inherit pkgs;
           basePackages = mat.packages;
           settingHook = ''
@@ -96,14 +98,14 @@
         pkgs:
         let
           sys = pkgs.stdenv.hostPlatform.system;
-          standardChecks = set-and-setting.lib.checksFor {
+          standardChecks = sasLib.checksFor {
             inherit pkgs fragments;
             src = ./.;
           };
         in
         standardChecks
         // rec {
-          dep-graph = set-and-setting.lib.mkDepGraphCheck {
+          dep-graph = sasLib.mkDepGraphCheck {
             inherit pkgs;
             projectRoot = ./.;
           };
@@ -123,7 +125,7 @@
       apps = forAllSystems (
         pkgs:
         let
-          mat = set-and-setting.lib.materializationFor { inherit pkgs fragments; };
+          mat = sasLib.materializationFor { inherit pkgs fragments; };
         in
         {
           confirm = {

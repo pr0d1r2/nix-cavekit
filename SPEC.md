@@ -105,3 +105,4 @@ inputs.nix-cavekit = {
 4. **Missing `config/lefthook/file_size_limits.yml` (2026-07-20)**: Required by `file-size-check`. Fixed by adding the config matching set-and-setting convention.
 5. **Missing `.nix-embedded-shell-allowlist` (2026-07-20)**: `nix-no-embedded-shell` flagged `flake.nix` for `writeShellApplication` block. Fixed by adding `flake.nix` to the allowlist.
 6. **`apps.confirm` missing materialization packages (2026-07-20)**: Coherence check failed — `lefthook-markdownlint`, `lefthook-markdownlint-agentic`, `lefthook-yamllint` not on PATH. Fixed by adding `mat.packages` to confirm app's `runtimeInputs`.
+7. **`attribute 'lib' missing` after pin refresh (2026-07-29)**: `set-and-setting` upstream removed its `lib` flake output; `flake.nix` called `set-and-setting.lib.*` directly. Fixed by binding `sasLib = set-and-setting.inputs.set-and-setting.lib` and routing all lib calls through it.
