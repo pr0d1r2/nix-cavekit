@@ -1,5 +1,5 @@
 {
-  description = "Nix package for cavekit";
+  description = "CHANGEME";
 
   nixConfig = {
     extra-substituters = [ "https://pr0d1r2.cachix.org" ];
@@ -11,12 +11,26 @@
     nixpkgs.follows = "nixpkgs-lock/nixpkgs";
 
     set-and-setting.url = "github:pr0d1r2/set-and-setting";
-
-    cavekit-src = {
-      url = "github:JuliusBrussee/cavekit";
-      flake = false;
-    };
+    set-and-setting.inputs.nixpkgs-lock.follows = "nixpkgs-lock";
   };
 
-  outputs = inputs: import ./outputs.nix { inherit inputs; };
+  outputs =
+    {
+      self,
+      nixpkgs,
+      set-and-setting,
+      ...
+    }:
+    set-and-setting.lib.mkConsumerFlake {
+      inherit self nixpkgs set-and-setting;
+      fragments = [
+        "base"
+        "nix"
+        "shell"
+        "ascii"
+        "markdown"
+        "yaml"
+      ];
+      src = ./.;
+    };
 }
