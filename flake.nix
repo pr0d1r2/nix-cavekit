@@ -10,6 +10,11 @@
     nixpkgs-lock.url = "github:pr0d1r2/nixpkgs-lock";
     nixpkgs.follows = "nixpkgs-lock/nixpkgs";
 
+    cavekit-src = {
+      url = "github:JuliusBrussee/cavekit";
+      flake = false;
+    };
+
     set-and-setting.url = "github:pr0d1r2/set-and-setting";
     set-and-setting.inputs.nixpkgs-lock.follows = "nixpkgs-lock";
   };
@@ -19,18 +24,12 @@
       self,
       nixpkgs,
       set-and-setting,
+      cavekit-src,
       ...
     }:
-    set-and-setting.lib.mkConsumerFlake {
-      inherit self nixpkgs set-and-setting;
-      fragments = [
-        "base"
-        "nix"
-        "shell"
-        "ascii"
-        "markdown"
-        "yaml"
-      ];
-      src = ./.;
+    import ./outputs.nix {
+      inputs = {
+        inherit self nixpkgs set-and-setting cavekit-src;
+      };
     };
 }
