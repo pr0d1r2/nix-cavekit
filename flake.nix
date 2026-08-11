@@ -29,7 +29,12 @@
     }:
     import ./outputs.nix {
       inputs = {
-        inherit self nixpkgs set-and-setting cavekit-src;
+        inherit
+          self
+          nixpkgs
+          set-and-setting
+          cavekit-src
+          ;
       };
     };
 }
