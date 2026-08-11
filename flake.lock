@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "cavekit-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1781762400,
+        "narHash": "sha256-7KXazRLxZoH85qXI3qHMl++B35QdrJhkGv9IGa7Y3Xw=",
+        "owner": "JuliusBrussee",
+        "repo": "cavekit",
+        "rev": "c322f0bb6db82163041930467f3ce32754d42827",
+        "type": "github"
+      },
+      "original": {
+        "owner": "JuliusBrussee",
+        "repo": "cavekit",
+        "type": "github"
+      }
+    },
     "nix-lefthook-ascii-only-src": {
       "flake": false,
       "locked": {
@@ -484,6 +500,7 @@
     },
     "root": {
       "inputs": {
+        "cavekit-src": "cavekit-src",
         "nixpkgs": [
           "nixpkgs-lock",
           "nixpkgs"
