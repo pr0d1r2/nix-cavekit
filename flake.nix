@@ -21,8 +21,35 @@
       set-and-setting,
       ...
     }:
-    set-and-setting.lib.mkConsumerFlake {
+    let
+      upstreamLib = set-and-setting.lib;
+      consumerLib = upstreamLib // {
+        checksFor = args:
+          let
+            fragmentsWithoutActions = builtins.filter (fragment: fragment != "actions") args.fragments;
+            actionlint =
+              let
+                files = nixpkgs.lib.sources.sourceByRegex args.src [ "^\\.github/workflows/.*\\.(yml|yaml)$" ];
+              in
+              args.pkgs.runCommand "actionlint-check" { nativeBuildInputs = [ args.pkgs.findutils ]; } ''
+                cd ${files}
+                mapfile -t matches < <(find . -type f | sort)
+                if [ ''${#matches[@]} -eq 0 ]; then
+                  echo "actionlint: no matching files, nothing to check"
+                  touch $out
+                  exit 0
+                fi
+                ${nixpkgs.lib.getExe args.pkgs.actionlint} "''${matches[@]}"
+                echo "actionlint: PASS (''${#matches[@]} files)"
+                touch $out
+              '';
+          in
+          (upstreamLib.checksFor (args // { fragments = fragmentsWithoutActions; })) // { inherit actionlint; };
+      };
+    in
+    consumerLib.mkConsumerFlake {
       inherit self nixpkgs set-and-setting;
+      lib = consumerLib;
       fragments = [
         "base"
         "actions"
