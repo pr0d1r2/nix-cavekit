@@ -1,0 +1,16 @@
+---
+exemptions:
+  - class: ".editorconfig"
+    ticket: 1
+  - class: ".envrc"
+    ticket: 2
+  - class: ".gitignore"
+    ticket: 3
+  - class: ".nix-embedded-shell-allowlist"
+    ticket: 4
+  - class: ".rtk/filters.toml"
+    ticket: 5
+  - class: "LICENSE"
+    ticket: 6
+  - class: "flake.lock"
+    ticket: 7
