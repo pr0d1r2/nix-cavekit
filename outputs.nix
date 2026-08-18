@@ -48,6 +48,7 @@ in
               inherit pkgs;
               fragments = [
                 "base"
+                "actions"
                 "nix"
                 "shell"
                 "ascii"
@@ -58,7 +59,7 @@ in
           settingHook = ''
               ${self.packages.${system}.setting}/bin/sync-setting .
             _assemble_out="$(mktemp -d)"
-              FRAGMENTS="base nix shell ascii markdown yaml" \
+              FRAGMENTS="base actions nix shell ascii markdown yaml" \
               out="$_assemble_out" \
               FRAGMENTS_DIR="${set-and-setting}/setting/integrations/lefthook" \
               bash "${set-and-setting}/setting/lib/assemble-lefthook.sh"
@@ -94,6 +95,7 @@ in
         inherit pkgs;
         fragments = [
           "base"
+          "actions"
           "nix"
           "shell"
           "ascii"
@@ -131,6 +133,7 @@ in
         inherit pkgs;
         fragments = [
           "base"
+          "actions"
           "nix"
           "shell"
           "ascii"
