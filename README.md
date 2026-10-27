@@ -6,7 +6,7 @@
 > what it may not, and what to check before trusting anything in this tree.
 <!-- hallucinogen:autonomy-disclaimer end -->
 
-[![CI](https://github.com/pr0d1r2/nix-cavekit/actions/workflows/ci.yml/badge.svg)](https://github.com/pr0d1r2/nix-cavekit/actions/workflows/ci.yml)
+[![CI](https://github.com/pr0d1r2/nix-cavekit/actions/workflows/ci.yml/badge.svg)](https://github.com/pr0d1r2/nix-cavekit/actions/workflows/ci.yml) [![NixOS 26.05](https://img.shields.io/badge/NixOS-26.05-blue.svg?logo=nixos)](https://nixos.org)
 
 Nix package for [cavekit](https://github.com/JuliusBrussee/cavekit) — spec-driven development toolkit for AI coding agents.
 
