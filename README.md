@@ -69,7 +69,7 @@ flowchart LR
   dev[nix develop] --> shell[devShell with lint tools]
   shell --> lefthook[lefthook hooks]
   lefthook -->|git commit| lint[lint wrappers]
-  ci[nix develop .#ci] --> checks[nix flake check]
+  ci[CI guardrails workflow] --> checks[nix flake check]
 ```
 
 ## License
