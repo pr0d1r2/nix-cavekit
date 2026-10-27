@@ -60,7 +60,6 @@ flowchart LR
   consumer[Consumer flake] -->|packages.default| plugin[cavekit plugin package]
   consumer -->|packages.setting| setting[agent setting package]
   src[cavekit-src input] --> plugin
-  plugin --> checks[flake checks]
 ```
 
 ## Development architecture
