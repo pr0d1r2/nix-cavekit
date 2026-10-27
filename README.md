@@ -53,6 +53,26 @@ lefthook run pre-commit
 The CI devShell (`nix develop .#ci`) does not include these wrappers or
 lefthook — CI runs the checks directly.
 
+## Architecture
+
+```mermaid
+flowchart LR
+  consumer[Consumer flake] -->|packages.default| plugin[cavekit plugin package]
+  consumer -->|packages.setting| setting[agent setting package]
+  src[cavekit-src input] --> plugin
+  plugin --> checks[flake checks]
+```
+
+## Development architecture
+
+```mermaid
+flowchart LR
+  dev[nix develop] --> shell[devShell with lint tools]
+  shell --> lefthook[lefthook hooks]
+  lefthook -->|git commit| lint[lint wrappers]
+  ci[nix develop .#ci] --> checks[nix flake check]
+```
+
 ## License
 
 MIT
