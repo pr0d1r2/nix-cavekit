@@ -4,6 +4,11 @@ All notable changes to this project are documented here.
 
 ## Unreleased
 
+- Refresh the `nixpkgs-lock` input (nixpkgs `ac588ef`). ruby in the locked
+  nixpkgs is still 3.4.11 (CVE-2026-97229, fixed in 3.4.12); the fix waits on
+  pr0d1r2/nixpkgs-lock#94. ruby is not in this package's closure. Re-run
+  `nix flake update nixpkgs-lock` once the backport lands.
+
 - Build against the current set-and-setting `mkConsumerFlake`, which no longer
   takes a `lib` override. The standard `actions` fragment now provides
   `actionlint`, so the local actionlint check is gone.
